@@ -15,7 +15,7 @@ let home: Home;
 let config: testconfig;
 
 //This hook runs before each test
-test.describe("Homepage tests", () => {
+test.describe("Homepage tests", {tag:"@regression"}, () => {
 
     test.beforeEach(async ({ page }) => {
         await page.goto('/inventory.html')

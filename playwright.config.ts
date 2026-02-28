@@ -12,11 +12,12 @@ export default defineConfig({
   workers: 1,
   retries: 1,
   timeout: 30 * 1000, //30000 ms 30 secs
-
+  grep:/@regression/, //specifying tag
 
   reporter: [['html'], ['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    
     baseURL: 'https://www.saucedemo.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
@@ -27,7 +28,7 @@ export default defineConfig({
     permissions: ['geolocation']
   },
 
-  //grep :/@master/,
+  
   projects: [
 
     {

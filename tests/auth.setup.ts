@@ -3,7 +3,7 @@ import { LoginPage } from '../pages/loginpage';
 import { testconfig } from '../test.config';
 import { Home } from '../pages/Homepage';
 
-setup('authenticate', async ({ page }) => {
+setup('authenticate', {tag:["@regression","@sanity"]},async ({ page }) => {
   const config = new testconfig();
   const login = new LoginPage(page);
 
