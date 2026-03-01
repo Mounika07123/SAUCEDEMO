@@ -13,6 +13,10 @@ export default defineConfig({
   retries: 1,
   timeout: 30 * 1000, //30000 ms 30 secs
   grep:/@regression/, //specifying tag
+  expect:{
+    timeout: 5000 // assertion timeout 5 sec
+
+  },
 
   reporter: [['html'], ['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -25,7 +29,9 @@ export default defineConfig({
     headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,//ignore SSL error
-    permissions: ['geolocation']
+    permissions: ['geolocation'],
+    navigationTimeout : 10000,//back,forward,from one page to another page
+    actionTimeout :15000,//Selecting an element an from dropdown
   },
 
   
