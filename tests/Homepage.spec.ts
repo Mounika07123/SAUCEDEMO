@@ -3,16 +3,14 @@
 2)Retreive the prices & print in the console
 3)Click on All about 
 */
-import { test, expect } from "@playwright/test"
+import { test } from "../fixtures/pomfixtures"
 //import { LoginPage } from "../pages/loginpage"
-import { Home } from "../pages/Homepage"
+//import { Home } from "../pages/Homepage"
 import { testconfig } from "../test.config";
+import { TestFixture } from "@playwright/test";
 
 //Assign variables
 
-//let login: LoginPage;
-let home: Home;
-let config: testconfig;
 
 //This hook runs before each test
 test.describe("Homepage tests", {tag:"@regression"}, () => {
@@ -20,32 +18,31 @@ test.describe("Homepage tests", {tag:"@regression"}, () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/inventory.html')
         //Initialize hompepage after login
-        home = new Home(page)
     })
 
 
     //Test to retreive all the items text
-    test("Retreive all the items", async ({ page }) => {
-    console.log(await home.itemText())
+    test("Retreive all the items", async ({ homepage }) => {
+    console.log(await homepage.itemText())
 
     })
 
     //Test to retreive all the items price
-    test("Retreive all the items prices", async ({ page }) => {
-        console.log(await home.itemprice())
+    test("Retreive all the items prices", async ({ homepage }) => {
+        console.log(await homepage.itemprice())
     })
 
     //Test to click on All About link
-    test("Click on All about link", async ({ page }) => {
-        await home.allabout();
+    test("Click on All about link", async ({ homepage }) => {
+        await homepage.allabout();
     })
 
     //Values are sorted in A-Z order
-    test("Values are sorted in A-Z order", async ({ page }) => {
-        const original: string[] = await home.itemText();
+    test("Values are sorted in A-Z order", async ({ homepage }) => {
+        const original: string[] = await homepage.itemText();
         const expected: string[] = [...original].sort((a, b) => a.localeCompare(b))
-        await home.selectSortOption(home.sortValues.nameAZ)
-        const afterSort = await home.itemText();
+        await homepage.selectSortOption(homepage.sortValues.nameAZ)
+        const afterSort = await homepage.itemText();
         expect(afterSort).toEqual(expected)
         console.log("After Sorted values:", afterSort)
         console.log("original array:", original)
@@ -53,11 +50,11 @@ test.describe("Homepage tests", {tag:"@regression"}, () => {
     })
 
     //Values are sorted in Z-A order
-    test("Values are sorted in Z-A order", async ({ page }) => {
-        const original: string[] = await home.itemText();
+    test("Values are sorted in Z-A order", async ({ homepage }) => {
+        const original: string[] = await homepage.itemText();
         const expected: string[] = [...original].sort((a, b) => b.localeCompare(a))
-        await home.selectSortOption(home.sortValues.nameZA)
-        const afterSort = await home.itemText();
+        await homepage.selectSortOption(homepage)
+        const afterSort = await homepage.itemText();
         expect(afterSort).toEqual(expected)
         console.log("After Sorted values:", afterSort)
         console.log("original array:", original)
@@ -66,11 +63,11 @@ test.describe("Homepage tests", {tag:"@regression"}, () => {
     })
 
     //Values are sorted in Price(High to Low) order
-    test("Values are sorted in Price(High to Low) order", async ({ page }) => {
-        const original: number[] = await home.itemprice();
+    test("Values are sorted in Price(High to Low) order", async ({ homepage }) => {
+        const original: number[] = await homepage.itemprice();
         const expected: number[] = [...original].sort((a, b) => b - a)
-        await home.selectSortOption(home.sortValues.priceHighLow)
-        const afterSort = await home.itemprice();
+        await homepage.selectSortOption(homepage.sortValues.priceHighLow)
+        const afterSort = await homepage.itemprice();
         expect(afterSort).toEqual(expected)
         console.log("After Sorted values:", afterSort)
         console.log("original array:", original)
