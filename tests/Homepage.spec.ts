@@ -75,13 +75,13 @@ test.describe("Homepage tests", {tag:"@regression"}, () => {
 
     })
 
-    //Values are sorted in Price(Low to High) order
-    test("Values are sorted in Price(Low to High) order", async ({ page }) => {
-        const original: number[] = await home.itemprice();
+    //Values are sorted in Price(Low to High) homepage
+    test("Values are sorted in Price(Low to High) order", async ({ homepage }) => {
+        const original: number[] = await homepage.itemprice();
         const expected: number[] = [...original].sort((a, b) => a - b)
-        await home.selectSortOption(home.sortValues.priceLowHigh)
-        const afterSort = await home.itemprice();
-        expect(afterSort).toEqual(expected)
+        await homepage.selectSortOption(homepage.sortValues.priceLowHigh)
+        const afterSort = await homepage.itemprice();
+        homepage(afterSort).toEqual(expected)
         console.log("After Sorted values:", afterSort)
         console.log("original array:", original)
 
