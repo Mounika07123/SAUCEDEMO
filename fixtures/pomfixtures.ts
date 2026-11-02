@@ -1,10 +1,12 @@
 import {test as baseTest} from "@playwright/test";
 import { LoginPage } from "../pages/loginpage";
 import { Home } from "../pages/Homepage";
+import { cart } from "../pages/cartpage";
 
 type MyPOMFixtures = {
     loginpage : LoginPage;
     homepage :Home;
+    cartPage:cart
 }
 
 export const test = baseTest.extend<MyPOMFixtures>({
@@ -17,5 +19,8 @@ export const test = baseTest.extend<MyPOMFixtures>({
         await use(new Home(page));
     },
 
+     cartPage: async ({ page }, use) => {
+        await use(new cart(page));
+    },
 
 })
