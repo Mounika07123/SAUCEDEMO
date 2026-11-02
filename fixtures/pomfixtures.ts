@@ -1,7 +1,8 @@
 import {test as baseTest} from "@playwright/test";
 import { LoginPage } from "../pages/loginpage";
 import { Home } from "../pages/Homepage";
-import { cart } from "../pages/cartpage";
+import { cart } from "../pages/cartpage"
+import {Logout} from "..."
 
 type MyPOMFixtures = {
     loginpage : LoginPage;
